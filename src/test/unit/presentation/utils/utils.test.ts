@@ -1,4 +1,4 @@
-import { isCpfValid } from "../../../presentation/utils"
+import { isCpfValid } from "../../../../presentation/utils"
 
 describe('Validate cpf', () => {
     it('Test cpf equal 35801215883', () => {
@@ -17,6 +17,13 @@ describe('Validate cpf', () => {
 
     it('Test cpf equal 3580-215883', () => {
         const cpf = '3580-215883'
+        const response = isCpfValid(cpf)
+
+        expect(response).toEqual(false)
+    })
+
+    it('Test cpf equal ""', () => {
+        const cpf = ''
         const response = isCpfValid(cpf)
 
         expect(response).toEqual(false)
