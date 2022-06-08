@@ -1,5 +1,6 @@
 import { IUserRepository } from '../../domain/repositories/IUserRepository'
 import { UserEntity } from '../../domain/entities/UserEntity'
+import { isValidUserData } from '../../presentation/utils'
 
 
 export class UserRepository implements IUserRepository {
@@ -26,7 +27,12 @@ export class UserRepository implements IUserRepository {
     }
 
     public create(user: UserEntity): Promise<UserEntity | undefined> {
+        if (!isValidUserData(user)) {
+            return Promise.resolve(undefined)
+        }
+
         this.users.push(user)
+        
         return Promise.resolve(user)
     }
 
