@@ -1,6 +1,6 @@
-import { FakeUserRepository } from '../../../../infra/repositories/UserRepository'
+import { UserRepository } from '../../../../infra/repositories/UserRepository'
 
-const userRepo = new FakeUserRepository()
+const userRepo = new UserRepository()
 
 const user1 =
     { cpf: '111', email: 'm@m.gmail.com', fone: '11', name: 'Marcos' }

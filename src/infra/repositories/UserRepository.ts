@@ -30,7 +30,7 @@ export class UserRepository implements IUserRepository {
         return Promise.resolve(user)
     }
 
-    edit(userCpf: string, userData: UserEntity) {
+    edit(userCpf: string, userData: UserEntity): {} {
         let [filteredUserByCpf] = this.users.filter(user => user.cpf === userCpf)
 
         if (!filteredUserByCpf) return {}
