@@ -1,6 +1,6 @@
 import { IUserRepository } from '../../domain/repositories/IUserRepository'
 import { UserEntity } from '../../domain/entities/UserEntity'
-// import { isValidUserData } from '../../presentation/utils'
+import { isCpfValid, isEmailValid, isPhoneValid } from '../../presentation/utils'
 
 export class UserRepository implements IUserRepository {
 
@@ -16,7 +16,15 @@ export class UserRepository implements IUserRepository {
     }
 
     private isValidUserData(user: UserEntity): boolean {
-        return true
+        if (
+            isCpfValid(user.cpf) &&
+            isPhoneValid(user.phone) &&
+            isEmailValid(user.email)
+        ) {
+            return true;
+        }
+
+        return false;
     }
 
     public get(userCpf: string): Promise<UserEntity | undefined> {
@@ -35,7 +43,7 @@ export class UserRepository implements IUserRepository {
         }
 
         this.users.push(user)
-        
+
         return Promise.resolve(user)
     }
 
