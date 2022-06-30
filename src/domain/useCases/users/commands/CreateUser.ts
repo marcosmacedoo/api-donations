@@ -1,31 +1,30 @@
-import { UserEntity } from '../../../entities/UserEntity'
+import { UserEntity } from "../../../entities/UserEntity";
 import { IUserRepository } from "../../../repositories/IUserRepository";
 
 interface IRequestModel {
-    cpf: string,
-    name: string
-    fone: string
-    email: string
+    cpf: string;
+    name: string;
+    phone: string;
+    email: string;
 }
 
 interface IResponseModel {
-    cpf: string,
-    name: string
-    fone: string
-    email: string
-    createdAt?: Date
-    updatedAt?: Date
+    cpf: string;
+    name: string;
+    phone: string;
+    email: string;
+    createdAt?: Date;
+    updatedAt?: Date;
 }
 
 export class CreateUser {
+    constructor(private userRepository: IUserRepository) {}
 
-    constructor(private userRepository: IUserRepository) {
+    public async execute(
+        userParam: IRequestModel
+    ): Promise<IResponseModel | undefined> {
+        const response = await this.userRepository.create(userParam);
 
-    }
-
-    public async execute(userParam: IRequestModel): Promise<IResponseModel> {
-        const response = await this.userRepository.create(userParam)
-        
-        return response
+        return response;
     }
 }
