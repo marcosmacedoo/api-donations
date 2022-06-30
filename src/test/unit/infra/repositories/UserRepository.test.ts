@@ -1,29 +1,44 @@
-// import { UserRepository } from '../../../../infra/repositories/UserRepository'
+// import { UserRepository } from "../../../../infra/repositories/UserRepository";
 
-describe('Tests', () => {
-    it('Test 1', () => expect({}).toEqual({}))
-})
+describe("Tests", () => {
+    it("Test 1", () => expect({}).toEqual({}));
+});
 
-// const userRepo = new UserRepository()
+// const userRepo = new UserRepository();
 
-// const user1 =
-//     { cpf: '111', email: 'm@m.gmail.com', fone: '11', name: 'Marcos' }
+// const user1 = {
+//     cpf: "35801215883",
+//     email: "marcos@gmail.com",
+//     fone: "86995028103",
+//     name: "Marcos Macedo",
+// };
 
-// const user2 = { cpf: '222', email: 'h@h.gmail.com', fone: '22', name: 'Hilton' }
+// const user2 = {
+//     cpf: "222",
+//     email: "h@h.gmail.com",
+//     fone: "22",
+//     name: "Hilton",
+// };
 
-// describe('Create user', () => {
-//     it('Should be return status code equal 200', () => {
-//         const response = userRepo.create(user1)
+// describe("Create user", () => {
+//     it("Should be return status code equal 200", () => {
+//         const user = {
+//             cpf: "35801215883",
+//             email: "marcos@gmail.com",
+//             fone: "86995028103",
+//             name: "Marcos Macedo",
+//         };
+//         const response = userRepo.create(user1);
 
-//         expect(response).toEqual({ statusCode: 200 })
-//     })
+//         expect(response).toEqual({ statusCode: 200 });
+//     });
 
-//     it('Should be return status code equal 400', () => {
-//         const response = userRepo.create(user1)
+//     it("Should be return status code equal 400", () => {
+//         const response = userRepo.create(user1);
 
-//         expect(response).not.toEqual({ statusCode: 400 })
-//     })
-// })
+//         expect(response).not.toEqual({ statusCode: 400 });
+//     });
+// });
 
 // describe('Get User by cpf', () => {
 //     it('Should be return user with cpf equal 111', () => {

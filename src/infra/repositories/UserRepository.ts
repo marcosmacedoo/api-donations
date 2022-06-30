@@ -1,12 +1,15 @@
 import { IUserRepository } from '../../domain/repositories/IUserRepository'
 import { UserEntity } from '../../domain/entities/UserEntity'
 import { isCpfValid, isEmailValid, isPhoneValid } from '../../presentation/utils'
+import { FirestoreUserRepository } from '../persistence/firestore/repositories/FirestoreUserRepository'
 
 export class UserRepository implements IUserRepository {
 
     private users: UserEntity[] = []
+    private firestore: FirestoreUserRepository
 
     constructor() {
+        this.firestore = new FirestoreUserRepository()
         const user1 = new UserEntity()
 
         Object.assign(user1, { cpf: '111', email: 'm@m.gmail.com', fone: '11', name: 'Marcos' })
@@ -37,14 +40,18 @@ export class UserRepository implements IUserRepository {
         return Promise.resolve(this.users.at(findIndex))
     }
 
-    public create(user: UserEntity): Promise<UserEntity | undefined> {
+    public async create(user: UserEntity): Promise<UserEntity | undefined> {
         if (!this.isValidUserData(user)) {
-            return Promise.resolve(undefined)
+            return undefined
         }
 
-        this.users.push(user)
-
-        return Promise.resolve(user)
+        try {
+            const savedUser = await this.firestore.save(user)
+            return savedUser
+        } catch (error) {
+            console.error(error)
+            return undefined
+        }
     }
 
     public edit(userCpf: string, userData: UserEntity): {} {
