@@ -2,7 +2,7 @@ import {
     isCpfValid,
     isEmailValid,
     isPhoneValid,
-} from "../../../../presentation/utils";
+} from "../../../../src/presentation/utils";
 
 describe("Validate cpf", () => {
     it("Test cpf equal 35801215883", () => {

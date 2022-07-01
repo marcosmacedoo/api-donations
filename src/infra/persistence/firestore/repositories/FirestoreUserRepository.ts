@@ -1,26 +1,36 @@
 import { UserEntity } from "../../../../domain/entities/UserEntity";
+import { IUserRepository } from "../../../../domain/repositories/IUserRepository";
 // import { IUserRepository } from "../../../../domain/repositories/IUserRepository";
 import { database } from '../index'
 
-class FirestoreUserRepository {
+class FirestoreUserRepository implements IUserRepository {
     private readonly collection = database.collection('users-test')
 
-    public async save(user: UserEntity): Promise<UserEntity | undefined> {
-        const newUser = {
-            ...user,
+    public async create(user: UserEntity): Promise<UserEntity | undefined> {
+        // const userExists = await this.get(user.cpf)
+        const userExists = false
+
+        if (userExists) {
+            throw new Error(`Usuário de cpf ${user.cpf} já existe no banco de dados`)
+        }
+
+        Object.assign(user, {
             updateAt: new Date(),
             createdAt: new Date()
-        }
+        })
 
         try {
-            await this.collection.add(newUser)
+            await this.collection.add(user)
         } catch (error){
             console.error(error)
-            throw new Error(`Erro ao salvo usuário de cpf ${newUser.cpf}`)
+            throw new Error(`Erro ao salvo usuário de cpf ${user.cpf}`)
         }
 
-        return newUser
+        return user
     }
+
+    get: (userCpf: string) => Promise<UserEntity | undefined>;
+    remove: (userCpf: string) => boolean;
 }
 
 export { FirestoreUserRepository }

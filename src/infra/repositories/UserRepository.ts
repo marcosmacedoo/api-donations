@@ -42,11 +42,11 @@ export class UserRepository implements IUserRepository {
 
     public async create(user: UserEntity): Promise<UserEntity | undefined> {
         if (!this.isValidUserData(user)) {
-            return undefined
+            throw new Error('Dados do usuário inválido')
         }
 
         try {
-            const savedUser = await this.firestore.save(user)
+            const savedUser = await this.firestore.create(user)
             return savedUser
         } catch (error) {
             console.error(error)

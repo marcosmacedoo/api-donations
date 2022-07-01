@@ -7,13 +7,15 @@ class UserController {
     public async save(request: Request, response: Response): Promise<Response> {
         const user = request.body as UserEntity;
         const userRepository = new UserRepository();
-        const createUser = new CreateUser(userRepository);
+        const command = new CreateUser(userRepository);
 
         try {
-            const savedUser = await createUser.execute(user);
+            const savedUser = await command.execute(user);
             return response.status(201).json(savedUser);
-        } catch {
-            return response.status(400).json(undefined);
+        } catch (error) {
+            return response
+                .status(400)
+                .json({ message: "Erro ao salvar usuário" });
         }
     }
 }
