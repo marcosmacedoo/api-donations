@@ -1,3 +1,4 @@
+import { isCpfValid } from "../../../../presentation/utils";
 import { UserEntity } from "../../../entities/UserEntity";
 import { IUserRepository } from "../../../repositories/IUserRepository";
 
@@ -5,17 +6,16 @@ interface IRequestModel{
     cpf: string
 }
 
-interface IResponseModel{
+interface IResponseModel {
     user: UserEntity
 }
 
 export class GetUserByCPF {
-    
+
     constructor(private userRepository: IUserRepository) {
     }
 
-    public async execute({cpf}: IRequestModel): Promise<IResponseModel> {
-
+    public async execute({ cpf }: IRequestModel): Promise<IResponseModel> {
         const user = await this.userRepository.get(cpf)
 
         if (!user){

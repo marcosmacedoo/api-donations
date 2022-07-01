@@ -23,8 +23,12 @@ export class CreateUser {
     public async execute(
         userParam: IRequestModel
     ): Promise<IResponseModel | undefined> {
-        const response = await this.userRepository.create(userParam);
+        const user = await this.userRepository.create(userParam);
 
-        return response;
+        if (!user) {
+            throw new Error('Usuário já existe')
+        }
+
+        return user;
     }
 }
