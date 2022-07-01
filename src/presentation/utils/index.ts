@@ -20,15 +20,11 @@ function isEmailValid(email: string): boolean {
 }
 
 function isValidUserData(user: UserEntity): boolean {
-    if (
+    return (
         isCpfValid(user.cpf) &&
         isPhoneValid(user.phone) &&
         isEmailValid(user.email)
-    ) {
-        return true;
-    }
-
-    return false;
+    );
 }
 
 export {
