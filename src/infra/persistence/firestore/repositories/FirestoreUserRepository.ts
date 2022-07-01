@@ -8,9 +8,9 @@ class FirestoreUserRepository implements IUserRepository {
 
     public async create(user: UserEntity): Promise<UserEntity | undefined> {
         // const userExists = await this.get(user.cpf)
-        const userExists = false
+        const userFound = undefined
 
-        if (userExists) {
+        if (userFound) {
             throw new Error(`Usuário de cpf ${user.cpf} já existe no banco de dados`)
         }
 
